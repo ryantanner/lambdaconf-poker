@@ -75,10 +75,5 @@ object Usage {
   import Categories._
   import TwoGapRank._
 
-  TwoGapRank.ranksAreTwoGap[Ten, Seven]
-
-  illTyped { """val x = TwoGap[QueenOfHearts, EightOfSpades]""" }
-
-  TwoGap[TenOfClubs, SevenOfHearts]()(TwoGapRank.ranksAreTwoGap[TenOfClubs#R, SevenOfHearts#R])
 
 }
