@@ -1,3 +1,5 @@
+import shapeless.test.illTyped
+
 import scala.annotation.implicitNotFound
 
 /**
@@ -214,6 +216,7 @@ object AlternateCards {
     implicit def gtEq3[A <: Nat, B <: Nat](implicit gteq: A >= B) = new >=[Succ[A], Succ[B]] {}
   }
 
+  /*
   trait NEq[A <: Nat, B <: Nat] extends Serializable
 
   object NEq {
@@ -223,7 +226,9 @@ object AlternateCards {
 
     implicit def neq1[B <: Nat] = new !=[Succ[B], _0] {}
     implicit def neq2[B <: Nat] = new !=[_0, Succ[B]] {}
+    implicit def neq3[A <: Nat, B <: Nat](implicit ev: Pred[A] != Pred[B]) = new !=[A, B] {}
   }
+  */
 
   trait RankGTEq[A <: Rank, B <: Rank] extends Serializable
 
@@ -232,7 +237,7 @@ object AlternateCards {
 
     type >==[A <: Rank, B <: Rank] = RankGTEq[A, B]
 
-    implicit def gtEq3[A <: Rank, B <: Rank](implicit gteq: A#Val >= B#Val): RankGTEq[A, B] = new >==[A, B] {}
+    implicit def gtEq[A <: Rank, B <: Rank](implicit gteq: A#Val >= B#Val): RankGTEq[A, B] = new >==[A, B] {}
   }
 
   trait RankLTEq[A <: Rank, B <: Rank] extends Serializable
@@ -244,5 +249,8 @@ object AlternateCards {
 
     implicit def gtEq3[A <: Rank, B <: Rank](implicit lteq: A#Val <= B#Val): RankLTEq[A, B] = new <==[A, B] {}
   }
+
+  TwoGap(QueenOfHearts, NineOfSpades)
+  illTyped { """TwoGap(QueenOfHearts, EightOfSpades)""" }
 
 }

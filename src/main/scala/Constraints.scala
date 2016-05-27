@@ -8,6 +8,8 @@ import GTEq._
 import RankGTEq._
 import RankLTEq._
 
+import PokerCards._
+
 trait JackOrQueen[R1 <: Rank] extends Serializable
 
 object JackOrQueen {
